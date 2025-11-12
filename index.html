@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>3D Gun Viewer — Hold-to-Shoot (Autofire)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" href="data:," />
+  <style>
+    html,body { height:100%; margin:0; font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial; background:#f3f4f6; }
+    #app { display:grid; grid-template-columns:320px 1fr; height:100vh; gap:10px; padding:10px; box-sizing:border-box; }
+    .panel { background:#fff; border-radius:8px; padding:12px; box-shadow:0 6px 18px rgba(13,18,30,0.06); }
+    .viewer { position:relative; border-radius:8px; overflow:hidden; background:#0b0b0b; }
+    #canvas-container { width:100%; height:100%; }
+    label { display:block; margin:8px 0 4px; font-size:13px; color:#333; }
+    select,input[type=range] { width:100%; }
+    button { width:100%; padding:10px; border:none; background:#0b69ff; color:white; border-radius:6px; cursor:pointer; font-weight:600; }
+    button:active { transform:translateY(1px); }
+    .small { font-size:13px; margin-top:8px; }
+    .controls-row { display:flex; gap:8px; }
+    .controls-row button { flex:1; }
+    .indicator { margin-top:8px; display:flex; gap:8px; align-items:center; }
+    .led { width:12px; height:12px; border-radius:50%; background:#bbb; box-shadow:inset 0 -2px 0 rgba(0,0,0,0.15); }
+    .led.on { background:#ff3b30; box-shadow:0 0 8px rgba(255,59,48,0.6); }
+    .hud { position:absolute; left:12px; bottom:12px; z-index:5; color:white; font-weight:700; text-shadow:0 2px 6px rgba(0,0,0,0.6); }
+    .hint { font-size:12px; color:#555; margin-top:6px; }
+    .attribution { font-size:12px; color:#666; margin-top:10px; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="panel">
+      <h3>3D Gun Viewer</h3>
+
+      <label for="gunSelect">Choose a gun model</label>
+      <select id="gunSelect">
+        <option value='{"name":"Modern Pistol","file":"models/gun.glb","sound":"sounds/pistol.mp3"}'>Modern Pistol</option>
+        <option value='{"name":"Kimber Revolver","file":"models/low-poly_kimber_k6s.glb","sound":"sounds/revolver.mp3"}'>Kimber K6s Revolver</option>
+        <option value='{"name":"Zeliska Magnum","file":"models/low-poly_pfeifer_zeliska.glb","sound":"sounds/zeliska.mp3"}'>Pfeifer Zeliska</option>
+        <option value='{"name":"Flintlock","file":"models/low-poly_simeon_north_model_1826.glb","sound":"sounds/flintlock.mp3"}'>Simeon North Flintlock</option>
+      </select>
+
+      <label class="small">Controls</label>
+      <div class="controls-row">
+        <button id="loadBtn">Load</button>
+        <button id="shootBtn" aria-pressed="false">Shoot</button>
+      </div>
+
+      <label for="fireRate">Fire rate (shots/sec)</label>
+      <input id="fireRate" type="range" min="1" max="20" step="0.5" value="8">
+      <div id="rateValue" style="font-size:13px;">8</div>
+
+      <label for="volume">Volume</label>
+      <input id="volume" type="range" min="0" max="1" step="0.01" value="0.8">
+
+      <label style="margin-top:8px">
+        <input id="holdToShoot" type="checkbox" checked> Hold to shoot (autofire)
+      </label>
+
+      <div class="indicator">
+        <div id="fireLed" class="led"></div>
+        <div class="hint">Hold Shoot or press <b>Space</b> key</div>
+      </div>
+
+      <div class="attribution">
+        Models in <code>/models</code>, sounds in <code>/sounds</code>.<br>Use CC-licensed or owned assets.
+      </div>
+    </div>
+
+    <div class="viewer panel" style="padding:0">
+      <div id="canvas-container"></div>
+      <div class="hud">Drag to rotate • Scroll to zoom</div>
+    </div>
+  </div>
+
+  <!-- Link the JS module -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
