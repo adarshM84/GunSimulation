@@ -83,7 +83,7 @@ Clone or download this project folder.
 
 ```
 
-git clone [https://github.com/yourusername/threejs-gun-viewer.git](https://github.com/yourusername/threejs-gun-viewer.git)
+git clone [https://github.com/adarshM84/GunSimulation.git](https://github.com/adarshM84/GunSimulation.git)
 cd threejs-gun-viewer
 
 ````
