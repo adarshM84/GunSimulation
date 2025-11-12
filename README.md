@@ -127,7 +127,7 @@ Add your gun models (`.glb` or `.gltf`) inside the `/models/` folder and sound f
 
 ---
 
-## 🌈 Customization
+## Customization
 
 You can easily modify lighting, environment, and materials:
 
